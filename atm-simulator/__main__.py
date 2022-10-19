@@ -1,4 +1,3 @@
-
 def login():
     # Insert logic to sign in the customer or operator
     # depending upon credentials given
