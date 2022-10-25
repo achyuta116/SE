@@ -1,3 +1,9 @@
-simple_chalk==0.1.0
-questionary==1.10.0
-
+ansicon==1.89.0
+blessed==1.19.1
+inquirer==2.10.0
+jinxed==1.2.0
+pyfiglet==0.8.post1
+python-editor==1.0.4
+readchar==4.0.3
+six==1.16.0
+wcwidth==0.2.5
