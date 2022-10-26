@@ -1,0 +1,25 @@
+{
+    "users" : [
+        {
+            "id" : 1,
+            "username" : "Achyuta",
+            "password" : "123456",
+            "accounts" : [
+                {
+                    "type": "Savings",
+                    "balance": 300
+                },
+                {
+                    "type": "Current",
+                    "balance": 200
+                }
+            ],
+            "loans": [
+
+            ],
+            "bills": [
+
+            ]
+        }
+    ]
+}
