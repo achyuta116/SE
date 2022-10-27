@@ -1,10 +1,9 @@
-from atexit import register
-from random import choices
 import inquirer
 from inquirer.themes import GreenPassion
 
 from atmsimulator.welcome import welcome
-
+from atmsimulator.login import login
+from atmsimulator.register import register
 
 def main():
     welcome()
@@ -14,11 +13,8 @@ def main():
     )
 
     if login_or_register == "Login":
-        pass
-        # login()
+        login()
     else:
-        pass
-        # register()
-
+        register()
 
 main()
