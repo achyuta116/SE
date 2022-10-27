@@ -1,0 +1,14 @@
+{
+   "data": [
+      {
+         "name": "chuck norris",
+         "balance": 1000,
+         "type": "savings",
+         "address": "USA",
+         "dob": "10-03-1940",
+         "pin": 5050,
+         "transactions": "",
+         "id": 451808503720545755
+      }
+   ]
+}
