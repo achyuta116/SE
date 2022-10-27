@@ -1,5 +1,8 @@
 from pyfiglet import figlet_format
+from simple_chalk import chalk
 
+from .utils.utils import clear
 
 def welcome():
-    print(figlet_format("Hindustan Bank",font="slant"))
+    clear()
+    print(chalk.green.bold(figlet_format("Hindustan Bank")))
