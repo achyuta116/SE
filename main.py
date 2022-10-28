@@ -1,9 +1,8 @@
 import inquirer
-from inquirer.themes import GreenPassion
-
 from atmsimulator.welcome import welcome
 from atmsimulator.login import login
 from atmsimulator.register import register
+
 
 def main():
     welcome()
@@ -12,9 +11,10 @@ def main():
         "Login or Register?", choices=["Login", "Register"]
     )
 
-    if login_or_register == "Login":
-        login()
-    else:
-        register()
+    if login_or_register == "Register":
+        register()  # no further execution
+
+    login()
+
 
 main()
