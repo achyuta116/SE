@@ -1,25 +1,59 @@
 {
-    "users" : [
-        {
-            "id" : 1,
-            "username" : "Achyuta",
-            "password" : "123456",
-            "accounts" : [
-                {
-                    "type": "Savings",
-                    "balance": 300
-                },
-                {
-                    "type": "Current",
-                    "balance": 200
-                }
-            ],
-            "loans": [
+		"users": [
+				{
+						"id": 1,
+						"username": "Achyuta",
+						"password": "123456",
+						"accounts": [
+								{
+										"type": "Savings",
+										"balance": 300,
+										"transactions": []
+								},
+								{
+										"type": "Current",
+										"balance": 200
+								}
+						],
+						"loans": [],
+						"bills": []
+				},
+				{
+						"id": 2,
+						"username": "RDJ",
+						"password": "123456",
+						"accounts": [
+								{
+										"type": "Savings",
+										"balance": 700
+								},
+								{
+										"type": "Current",
+										"balance": 400
+								}
+						],
+						"loans": [],
+						"bills": [],
+						"isOperator": true
+				},
+				{
+						"id": 4,
+						"username": "Nikhil",
+						"password": "123456",
+						"accounts": [
+								{
+										"type": "Savings",
+										"balance": 700
+								},
+								{
+										"type": "Current",
+										"balance": 400
+								}
+						],
+						"loans": [],
+						"bills": [],
+						"isOperator": true
+				}
 
-            ],
-            "bills": [
-
-            ]
-        }
-    ]
+		]
 }
