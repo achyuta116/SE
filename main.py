@@ -1,7 +1,7 @@
-from atmsimulator.welcome import welcome
+from atmsimulator.login import login
+
 
 def main():
-    welcome()
-    # login()
+    login()
 
 main()
