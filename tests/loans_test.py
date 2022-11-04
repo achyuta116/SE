@@ -1,10 +1,14 @@
+import sys
 import unittest
+
+import requests
 from atmsimulator.loans import *
+from unittest.mock import patch
 
 class TestLoans(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
+    def setUp(self) -> None:
         from atmsimulator import globals
+        
         globals.account = {
             "id": 1,
             "username": "Achyuta",
@@ -30,17 +34,26 @@ class TestLoans(unittest.TestCase):
             ],
             "bills": []
         }
-        return super().setUpClass()
+        return super().setUp()
 
+    @patch('requests.get', lambda _: requests.Response)
     def test_customer_loan_selection(self):
-        customer_loan_selection()
+        with patch('requests.Response.json') as mock_json:
+            mock_json.return_value = [globals.account]
+            customer_loan_selection()
 
+    @patch('requests.get', lambda _: requests.Response)
     def test_customer_loan_application(self):
-        customer_loan_application()
-        self.assertEqual(len(globals.account['loans']), 3)
+        with patch('requests.Response.json') as mock_json:
+            mock_json.return_value = [globals.account]
+            customer_loan_application()
+            self.assertEqual(len(globals.account['loans']), 3)
 
+    @patch('requests.get', lambda _: requests.Response)
     def test_customer_loan_review(self):
-        customer_loan_review()
+        with patch('requests.Response.json') as mock_json:
+            mock_json.return_value = [globals.account]
+            customer_loan_review()
 
 
 
