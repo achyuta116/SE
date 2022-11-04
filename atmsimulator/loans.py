@@ -1,4 +1,5 @@
 import inquirer
+import re
 from datetime import datetime
 from . import globals
 from .utils.util import reset
@@ -27,8 +28,16 @@ def customer_loan_application():
         if loan['date'] == date:
             print('Cannot apply for two loans on the same day.')
             reset()
-    principal = int(input('Enter amount in rs you wish to borrow '))
-    tenure = int(input('Enter tenure for which you wish to borrow the principal '))
+
+    questions = [
+        inquirer.Text('principal', message='Enter amount in rs you wish to borrow',
+                      validate=lambda x, _: re.match('[\d]+', x)),
+        inquirer.Text('tenure', message='Enter tenure for which you wish to borrow the principal',
+                      validate=lambda x, _: re.match('[\d]+', x)),
+    ]
+    answers = inquirer.prompt(questions)
+    principal = answers['principal']
+    tenure = answers['tenure']
 
     print("Principal requested", principal, "Rs.")
     print("For tenure of", tenure, "yrs")
@@ -36,8 +45,8 @@ def customer_loan_application():
 
     globals.account['loans'].append({'principal': principal, 'tenure': tenure, 'status': 'Notified Bank'})
     
-    print("""We've notified your bank that you wish to borrow a loan.\n
-    Please contact your bank for further details.""")
+    print("""We've notified your bank that you wish to borrow a loans
+Please contact your bank for further details.""")
     reset()
 
 

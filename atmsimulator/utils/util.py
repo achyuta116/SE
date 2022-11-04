@@ -1,5 +1,5 @@
 import os
-from ..__main__ import login
+from ..login import login
 from .. import globals
 
 
