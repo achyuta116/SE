@@ -1,6 +1,9 @@
 import os
 import time 
 from datetime import date,datetime
+from ..login import login
+from .. import globals
+
 
 def clear():
     """ clear screen """
@@ -17,3 +20,8 @@ def timestamp():
     timestamp = "%s %s" %(curr_date,curr_time)
 
     return timestamp
+    
+def reset():
+    input('Press Enter to Exit')
+    clear()
+    login()
