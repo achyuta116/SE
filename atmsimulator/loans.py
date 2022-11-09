@@ -2,9 +2,12 @@ import inquirer
 import re
 from datetime import datetime
 from . import globals
-from .utils.util import reset
+from .utils.util import reset, disabled_service_message
 
 def customer_loan_selection():
+    if not globals.config['loan']:
+        disabled_service_message()
+        return
     # Implement select functionality for customer account screen
     question = [
         inquirer.List('selection',
@@ -31,9 +34,9 @@ def customer_loan_application():
 
     questions = [
         inquirer.Text('principal', message='Enter amount in rs you wish to borrow',
-                      validate=lambda x, _: re.match('[\d]+', x)),
+                      validate=lambda _, x: re.match('[0-9]+', x)),
         inquirer.Text('tenure', message='Enter tenure for which you wish to borrow the principal',
-                      validate=lambda x, _: re.match('[\d]+', x)),
+                      validate=lambda _, x: re.match('[0-9]+', x)),
     ]
     answers = inquirer.prompt(questions)
     principal = answers['principal']
