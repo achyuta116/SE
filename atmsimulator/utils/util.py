@@ -3,7 +3,7 @@ import time
 from datetime import date,datetime
 from ..login import login
 from .. import globals
-
+from simple_chalk import chalk, green
 
 def clear():
     """ clear screen """
@@ -27,7 +27,7 @@ def reset():
     login()
 
 def disabled_service_message():
-    print('Cannot avail this service as it has been disabled by you or the operator. Please visit our bank for more information or wait till services get enabled.')
+    print(chalk.red.bold('Cannot avail this service as it has been disabled by you or the operator. Please visit our bank for more information or wait till services get enabled.'))
 
 def unsuccessful_transaction_message():    
-    print('Transaction Unsuccessful. Try again after some time. You may report your dissent on our feedback page.')
+    print(chalk.red.bold('Transaction Unsuccessful. Try again after some time. You may report your dissent on our feedback page.'))
