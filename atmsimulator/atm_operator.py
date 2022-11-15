@@ -59,6 +59,7 @@ def operator_options_disable_service():
         elif(element=="Bill"):
             globals.config["bill"] = 1
             print("Bill generation DISABLED")
+            print()
 
 
 
