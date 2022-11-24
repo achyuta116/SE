@@ -1,43 +1,52 @@
 {
-	"users": [
-		{
-			"id": 1,
-			"username": "achyuta116",
-			"password": "1234",
-			"name": "Achyuta",
-			"accounts": [
-				{
-					"type": "Savings",
-					"balance": 300
-				},
-				{
-					"type": "Current",
-					"balance": 200
-				}
-			],
-			"transactions": [],
-			"loans": [],
-			"bills": []
-		},
-		{
-			"id": 2,
-			"username": "tempuser",
-			"password": "6060",
-			"name": "Testing User",
-			"accounts": [
-				{
-					"type": "Savings",
-					"balance": 700
-				},
-				{
-					"type": "Current",
-					"balance": 400
-				}
-			],
-			"transactions": [],
-			"loans": [],
-			"bills": [],
-			"isOperator": true
-		}
-	]
+  "users": [
+    {
+      "id": 1,
+      "username": "achyuta116",
+      "password": "1234",
+      "name": "Achyuta",
+      "accounts": [
+        {
+          "type": "Savings",
+          "balance": 300
+        },
+        {
+          "type": "Current",
+          "balance": 200
+        }
+      ],
+      "transactions": [],
+      "loans": [
+        {
+          "principal": "23432",
+          "tenure": "23",
+          "status": "Notified Bank",
+          "type": "N/A",
+          "date": "11/24/22"
+        }
+      ],
+      "bills": [],
+      "isOperator": false
+    },
+    {
+      "id": 2,
+      "username": "tempuser",
+      "password": "6060",
+      "name": "Testing User",
+      "accounts": [
+        {
+          "type": "Savings",
+          "balance": 700
+        },
+        {
+          "type": "Current",
+          "balance": 400
+        }
+      ],
+      "transactions": [],
+      "loans": [],
+      "bills": [],
+      "isOperator": true
+    }
+  ]
 }

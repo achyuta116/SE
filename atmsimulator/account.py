@@ -2,7 +2,7 @@ from texttable import Texttable
 from simple_chalk import chalk
 import time
 import inquirer
-from .globals import *
+from . import globals
 from .utils.util import *
 import re
 
@@ -23,8 +23,6 @@ def customer_account_selection():
         customer_account_cheque_deposit()
     elif selection == 'Mini Statement':
         customer_account_mini_statement()
-    else:
-        reset()
 
 
 def customer_account_check_balance():
@@ -35,7 +33,6 @@ def customer_account_check_balance():
     print('Your savings are: ',
           globals.account['accounts'][0]['balance'], ' Rs.')
     time.sleep(3)
-    customer_account_selection()
 
 
 def customer_account_cash_withdrawal():
@@ -80,7 +77,6 @@ def customer_account_cash_withdrawal():
                       globals.account['accounts'][1]['balance'])
 
         else:
-            clear()
             unsuccessful_transaction_message()
 
 
@@ -122,7 +118,6 @@ def customer_account_cheque_deposit():
             print('Deposit successful. Your current balance is: ',
                   globals.account['accounts'][1]['balance'])
     else:
-        clear()
         unsuccessful_transaction_message()
 
 
@@ -133,7 +128,7 @@ def customer_account_mini_statement():
         disabled_service_message()
     else:
         try:
-            transactions: list = account.get("transactions")
+            transactions: list = globals.account["transactions"]
 
             if (transactions is not None and len(transactions) > 0):
                 table = Texttable(max_width=0)

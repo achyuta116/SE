@@ -1,9 +1,7 @@
 import os
 import time 
 from datetime import date,datetime
-from ..login import login
-from .. import globals
-from simple_chalk import chalk, green
+from simple_chalk import chalk
 
 def clear():
     """ clear screen """
@@ -20,11 +18,6 @@ def timestamp():
     timestamp = "%s %s" %(curr_date,curr_time)
 
     return timestamp
-    
-def reset():
-    input('Press Enter to Exit')
-    clear()
-    login()
 
 def disabled_service_message():
     print(chalk.red.bold('Cannot avail this service as it has been disabled by you or the operator. Please visit our bank for more information or wait till services get enabled.'))
