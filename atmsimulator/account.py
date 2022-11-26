@@ -9,6 +9,7 @@ import re
 
 def customer_account_selection():
     # Implement select functionality for customer account screen
+    clear()
     question = [inquirer.List('selection',
                               message='Choose account service',
                               choices=['Check Balance', 'Cash Withdrawal',
@@ -28,6 +29,7 @@ def customer_account_selection():
 def customer_account_check_balance():
     # Implement functionality to retrieve and print balance.
     # 5 recent transactions printed with mini-statement.
+    clear()
     print('Your current balance is: ',
           globals.account['accounts'][1]['balance'], ' Rs.')
     print('Your savings are: ',
@@ -38,14 +40,18 @@ def customer_account_check_balance():
 def customer_account_cash_withdrawal():
     # Implement functionality to deduct money from respective account
     # and print withdrawal message to the customer
+    clear()
     if globals.config['account']['withdrawal'] != 1:
         disabled_service_message()
+        return
     else:
         question = [inquirer.List('selection',
                                   message='Choose account to withdraw',
                                   choices=['Savings', 'Current', 'Cancel'],
                                   )]
         selection = inquirer.prompt(question)['selection']
+
+        clear()
 
         request_questions = [
             inquirer.Text(name='w', message="Enter amount in Rs. to be withdrawn: ",
@@ -59,6 +65,7 @@ def customer_account_cash_withdrawal():
             if globals.account['accounts'][0]['balance'] < withdraw or withdraw > 250000 or withdraw < 50:
                 print('Your account has insufficient balance or maximum withdrawal limit exceeded or less than minimum withdraw requested.')
                 unsuccessful_transaction_message()
+                return
             else:
                 globals.account['accounts'][0]['balance'] -= withdraw
                 print('Withdraw successful. Your savings balance is: ',
@@ -71,6 +78,7 @@ def customer_account_cash_withdrawal():
             if globals.account['accounts'][1]['balance'] < withdraw or withdraw > 250000 or withdraw < 50:
                 print('Your account has insufficient balance or maximum withdrawal limit exceeded or less than minimum withdraw requested.')
                 unsuccessful_transaction_message()
+                return
             else:
                 globals.account['accounts'][1]['balance'] -= withdraw
                 print('Withdraw successful. Your savings balance is: ',
@@ -78,17 +86,23 @@ def customer_account_cash_withdrawal():
 
         else:
             unsuccessful_transaction_message()
+            return
+        time.sleep(3)
+
 
 
 def customer_account_cheque_deposit():
     # Implement functionality to add cheque funds into respective
     # account and print confirmation message
+    clear()
     question = [inquirer.List('selection',
                               message='Choose account to deposit cheque',
                               choices=['Savings', 'Current', 'Cancel'])
 
                 ]
     selection = inquirer.prompt(question)['selection']
+
+    clear()
 
     request_questions = [
         inquirer.Text(name='d', message="Enter amount in Rs. to be deposited: ",
@@ -105,6 +119,7 @@ def customer_account_cheque_deposit():
         else:
             # print('Invalid input. Please enter a numeral amount greater than 50 rs')
             unsuccessful_transaction_message()
+            return
 
     elif selection == 'Current':
         deposit = inquirer.prompt(request_questions)
@@ -113,19 +128,23 @@ def customer_account_cheque_deposit():
         if deposit < 50:
             # print('Invalid input. Please enter a numeral amount greater than 50 rs')
             unsuccessful_transaction_message()
+            return
         else:
             globals.account['accounts'][1]['balance'] += deposit
             print('Deposit successful. Your current balance is: ',
                   globals.account['accounts'][1]['balance'])
     else:
         unsuccessful_transaction_message()
+        return
+    time.sleep(3)
 
 
 def customer_account_mini_statement():
     """ display 5 most recent transactions of the user in table format """
-
+    clear()
     if globals.config['account']['mini'] != 1:
         disabled_service_message()
+        return
     else:
         try:
             transactions: list = globals.account["transactions"]
@@ -147,8 +166,11 @@ def customer_account_mini_statement():
                 table.add_rows(transactions[-5:])
 
                 print(table.draw())
+                time.sleep(3)
             else:
                 print(chalk.red.bold("No Transactions to Display."))
+                time.sleep(3)
+                return
 
         except Exception as e:
             print(e)

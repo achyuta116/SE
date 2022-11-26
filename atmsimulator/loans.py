@@ -1,10 +1,13 @@
+from time import sleep
+from simple_chalk import chalk
 import inquirer
 import re
 from datetime import datetime
 from . import globals
-from .utils.util import disabled_service_message
+from .utils.util import clear, disabled_service_message
 
 def customer_loan_selection():
+    clear()
     if not globals.config['loan']:
         disabled_service_message()
         return
@@ -23,11 +26,11 @@ def customer_loan_selection():
 
 def customer_loan_application():
     # Implement functionality to apply for a loan
-
+    clear()
     date = datetime.now().strftime("%x")
     for loan in globals.account['loans']:
         if loan['date'] == date:
-            print('Cannot apply for two loans on the same day.')
+            print(chalk.red.bold('Cannot apply for two loans on the same day.'))
             return
 
     questions = [
@@ -46,13 +49,15 @@ def customer_loan_application():
 
     globals.account['loans'].append({'principal': principal, 'tenure': tenure, 'status': 'Notified Bank', 'type': 'N/A', 'date': date})
     
-    print("""We've notified your bank that you wish to borrow a loans
-Please contact your bank for further details.""")
+    print(chalk.green.bold("""We've notified your bank that you wish to borrow a loans
+Please contact your bank for further details."""))
+    sleep(3)
 
 
 def customer_loan_review():
     # Implement functionality for a customer to review
     # loan application state and loan details
+    clear()
     choices = []
     for loan in globals.account['loans']:
         choices.append(loan['type'] + ' ' + loan['date'])
@@ -75,3 +80,4 @@ def customer_loan_review():
                 print('Interest Due', loan['interest'])
             print()
             break
+    sleep(3)

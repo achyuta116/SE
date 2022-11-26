@@ -1,10 +1,12 @@
 import sys
+from time import sleep
 import inquirer
 from . import globals
 from .utils.util import *
 
 def operator_options_selection():
     # Implement functionality to display options provided to the operator
+    clear()
     choice = [
         inquirer.List('selection',
                       message='Choose operator services',
@@ -22,11 +24,13 @@ def operator_options_selection():
 def operator_options_shutdown():
     # Implement functionality to shut down the ATM
     # here by quitting the CLI altogether
+    clear()
     sys.exit("ATM SHUTDOWN")
 
 
 def operator_options_disable_service():
     # Implement functionality to disable any service offered to the customer
+    clear()
     choices = []
     if (globals.config['loan'] == 1):
         choices.append('Loan')
@@ -36,7 +40,8 @@ def operator_options_disable_service():
         choices.append('Mini Statement')
 
     if len(choices) == 0:
-        print('No services to disable')
+        print(chalk.red.bold('No services to disable'))
+        sleep(3)
         return
 
     question = [
@@ -56,9 +61,11 @@ def operator_options_disable_service():
             globals.config["account"]["mini"] = 0
             print("Mini Statement is DISABLED")
     print("Services updated")
+    sleep(3)
 
 def operator_options_enable_service():
     # Implement functionality to enable any service offered to the customer
+    clear()
     choices = []
     if (globals.config['loan'] == 0):
         choices.append('Loan')
@@ -68,7 +75,8 @@ def operator_options_enable_service():
         choices.append('Mini Statement')
 
     if len(choices) == 0:
-        print('No services to enable')
+        print(chalk.red.bold('No services to enable'))
+        sleep(3)
         return
     question = [
         inquirer.Checkbox('selection',
@@ -86,3 +94,4 @@ def operator_options_enable_service():
             globals.config["account"]["mini"] = 1
             print("Mini Statement is ENABLED")
     print("Services updated")
+    sleep(3)
