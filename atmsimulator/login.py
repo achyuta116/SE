@@ -38,20 +38,18 @@ def login():
         print("Hello,", chalk.green.bold(user_name))
         if get_account()['isOperator']:
             operator_options_selection()
-        else: 
+        else:
             customer_category_selection()
 
-            res = requests.put(f"http://localhost:3000/users/{user_name}", 
+            user_id = data[0].get("id")
+
+            res = requests.put(f"http://localhost:3000/users/{user_id}", 
                          json=get_account())
             if (res.status_code == 200):
                 print(chalk.green.bold('Transaction successful'))
             else:
                 print(chalk.red.bold('Something went wrong with your transaction'))
                 sys.exit(1)
-
-
-
-
 
 if __name__ == "__main__":
     login()
