@@ -8,7 +8,7 @@
       "accounts": [
         {
           "type": "Savings",
-          "balance": 300
+          "balance": 180
         },
         {
           "type": "Current",
@@ -23,6 +23,13 @@
           "status": "Notified Bank",
           "type": "N/A",
           "date": "11/24/22"
+        },
+        {
+          "principal": "123",
+          "tenure": "34",
+          "status": "Notified Bank",
+          "type": "N/A",
+          "date": "11/27/22"
         }
       ],
       "bills": [],
