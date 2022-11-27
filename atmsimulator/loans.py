@@ -31,6 +31,7 @@ def customer_loan_application():
     for loan in globals.account['loans']:
         if loan['date'] == date:
             print(chalk.red.bold('Cannot apply for two loans on the same day.'))
+            sleep(3)
             return
 
     questions = [

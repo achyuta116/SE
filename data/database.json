@@ -8,11 +8,11 @@
       "accounts": [
         {
           "type": "Savings",
-          "balance": 180
+          "balance": 120
         },
         {
           "type": "Current",
-          "balance": 200
+          "balance": 100
         }
       ],
       "transactions": [],

@@ -45,21 +45,21 @@ def operator_options_disable_service():
         return
 
     question = [
-        inquirer.Checkbox('selection',
+        inquirer.List('selection',
                       message='Disable which type of service',
                       choices=choices
                       )]
     selection = inquirer.prompt(question)['selection']
-    for element in selection:
-        if(element=="Loan"):
-            globals.config["loan"] = 0
-            print("Loan option DISABLED")
-        elif(element=="Withdrawal"):
-            globals.config["account"]["withdrawal"] = 0
-            print("Withdrawal is DISABLED")
-        elif(element=="Mini Statement"):
-            globals.config["account"]["mini"] = 0
-            print("Mini Statement is DISABLED")
+
+    if(selection=='Loan'):
+        globals.config['loan'] = 0
+        print("Loan option DISABLED")
+    elif(selection=="Withdrawal"):
+        globals.config["account"]["withdrawal"] = 0
+        print("Withdrawal is DISABLED")
+    elif(selection=="Mini Statement"):
+        globals.config["account"]["mini"] = 0
+        print("Mini Statement is DISABLED")
     print("Services updated")
     sleep(3)
 
@@ -79,19 +79,19 @@ def operator_options_enable_service():
         sleep(3)
         return
     question = [
-        inquirer.Checkbox('selection',
+        inquirer.List('selection',
                       message='Enable which type of service',
                       choices=choices)]
     selection = inquirer.prompt(question)['selection']
-    for element in selection:
-        if(element=="Loan"):
-            globals.config["loan"] = 1
-            print("Loan option ENABLED")
-        elif(element=="Withdrawal"):
-            globals.config["account"]["withdrawal"] = 1
-            print("Withdrawal is ENABLED")
-        elif(element=="Mini Statement"):
-            globals.config["account"]["mini"] = 1
-            print("Mini Statement is ENABLED")
+
+    if(selection=="Loan"):
+        globals.config["loan"] = 1
+        print("Loan option ENABLED")
+    elif(selection=="Withdrawal"):
+        globals.config["account"]["withdrawal"] = 1
+        print("Withdrawal is ENABLED")
+    elif(selection=="Mini Statement"):
+        globals.config["account"]["mini"] = 1
+        print("Mini Statement is ENABLED")
     print("Services updated")
     sleep(3)
