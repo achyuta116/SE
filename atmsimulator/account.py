@@ -82,50 +82,70 @@ def customer_account_cash_withdrawal():
         ]
 
         if selection == "Savings":
-            withdraw = inquirer.prompt(request_questions)
-            withdraw = int(withdraw["w"])
-            if (
-                globals.account["accounts"][0]["balance"] < withdraw
-                or withdraw > 250000
-                or withdraw < 50
-                or withdraw > globals.config['cash']
-            ):
-                print(
-                    "Your account has insufficient balance or maximum withdrawal limit exceeded or less than minimum withdraw requested."
-                )
-                unsuccessful_transaction_message()
-                return
-            else:
-                globals.account["accounts"][0]["balance"] -= withdraw
-                globals.config['cash']-= withdraw
-                # print(globals.config['cash'])
-                print(
-                    "Withdraw successful. Your savings balance is: ",
-                    globals.account["accounts"][0]["balance"],
-                )
+
+            retries = 2
+            while(True):
+                withdraw = inquirer.prompt(request_questions)
+                withdraw = int(withdraw["w"])
+                if (
+                    globals.account["accounts"][0]["balance"] < withdraw
+                    or withdraw > 250000
+                    or withdraw < 50
+                ):
+                    if retries:
+                        retries -= 1
+                        print(chalk.red.bold("Invalid amount entered, try again."))
+                        time.sleep(3)
+                        clear()
+                        continue
+                    if retries == 0:
+                        print("Exceeded max number of retries")
+                    else:
+                        print(
+                            "Your account has insufficient balance or maximum withdrawal limit exceeded or less than minimum withdraw requested."
+                        )
+                    unsuccessful_transaction_message()
+                    return
+                else:
+                    globals.account["accounts"][0]["balance"] -= withdraw
+                    print(
+                        "Withdraw successful. Your savings balance is: ",
+                        globals.account["accounts"][0]["balance"],
+                    )
+                    break
 
         elif selection == "Current":
-            withdraw = inquirer.prompt(request_questions)
-            withdraw = int(withdraw["w"])
+            retries = 2
+            while(True):
+                withdraw = inquirer.prompt(request_questions)
+                withdraw = int(withdraw["w"])
 
-            if (
-                globals.account["accounts"][1]["balance"] < withdraw
-                or withdraw > 250000
-                or withdraw < 50
-                or withdraw > globals.config['cash']
-            ):
-                print(
-                    "Your account has insufficient balance or maximum withdrawal limit exceeded or less than minimum withdraw requested."
-                )
-                unsuccessful_transaction_message()
-                return
-            else:
-                globals.account["accounts"][1]["balance"] -= withdraw
-                globals.config['cash']-= withdraw
-                print(
-                    "Withdraw successful. Your savings balance is: ",
-                    globals.account["accounts"][1]["balance"],
-                )
+                if (
+                    globals.account["accounts"][1]["balance"] < withdraw
+                    or withdraw > 250000
+                    or withdraw < 50
+                ):
+                    if retries:
+                        retries -= 1
+                        print(chalk.red.bold("Invalid amount entered, try again."))
+                        time.sleep(3)
+                        clear()
+                        continue
+                    if retries == 0:
+                        print(chalk.red.bold("Exceeded max number of retries"))
+                    else:
+                        print(
+                            "Your account has insufficient balance or maximum withdrawal limit exceeded or less than minimum withdraw requested."
+                        )
+                    unsuccessful_transaction_message()
+                    return
+                else:
+                    globals.account["accounts"][1]["balance"] -= withdraw
+                    print(
+                        "Withdraw successful. Your savings balance is: ",
+                        globals.account["accounts"][1]["balance"],
+                    )
+                    break
 
         else:
             unsuccessful_transaction_message()
