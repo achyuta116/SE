@@ -6,6 +6,7 @@ from atmsimulator.loans import (
     customer_loan_application,
     customer_loan_review,
 )
+from atmsimulator import globals
 from unittest.mock import patch
 
 

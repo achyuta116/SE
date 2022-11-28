@@ -194,17 +194,6 @@ def customer_account_mini_statement():
 
             if transactions is not None and len(transactions) > 0:
                 table = Texttable(max_width=0)
-                table.add_row(
-                    [
-                        "Sl No.",
-                        "Time",
-                        "Transaction ID",
-                        "Type",
-                        "Withdrawl",
-                        "Deposit",
-                        "Balance",
-                    ]
-                )
                 table.set_cols_align(["c", "c", "c", "c", "c", "c", "c"])
                 table.add_rows(transactions[-5:])
 
