@@ -5,6 +5,7 @@ config = {
         "withdrawal": 1,
         "mini": 1,
     },
+    "cash":100000
 }
 
 
