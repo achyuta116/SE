@@ -5,5 +5,11 @@ config = {
         'withdrawal': 1,
         'mini': 1,
     },
-    'bill': 1
 }
+
+def set_account(data):
+    global account
+    account = data
+
+def get_account():
+    return account

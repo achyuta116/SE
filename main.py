@@ -2,7 +2,8 @@ from atmsimulator.login import login
 
 
 def main():
-    login()
+    while True:
+        login()
 
 
 main()

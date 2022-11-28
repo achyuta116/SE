@@ -1,10 +1,13 @@
+from time import sleep
+from simple_chalk import chalk
 import inquirer
 import re
 from datetime import datetime
 from . import globals
-from .utils.util import reset, disabled_service_message
+from .utils.util import clear, disabled_service_message
 
 def customer_loan_selection():
+    clear()
     if not globals.config['loan']:
         disabled_service_message()
         return
@@ -19,18 +22,17 @@ def customer_loan_selection():
         customer_loan_application()
     elif selection == 'Loan Review':
         customer_loan_review()
-    else:
-        reset()
 
 
 def customer_loan_application():
     # Implement functionality to apply for a loan
-
+    clear()
     date = datetime.now().strftime("%x")
     for loan in globals.account['loans']:
         if loan['date'] == date:
-            print('Cannot apply for two loans on the same day.')
-            reset()
+            print(chalk.red.bold('Cannot apply for two loans on the same day.'))
+            sleep(3)
+            return
 
     questions = [
         inquirer.Text('principal', message='Enter amount in rs you wish to borrow',
@@ -46,16 +48,17 @@ def customer_loan_application():
     print("For tenure of", tenure, "yrs")
     print("Date Applied:", date)
 
-    globals.account['loans'].append({'principal': principal, 'tenure': tenure, 'status': 'Notified Bank'})
+    globals.account['loans'].append({'principal': principal, 'tenure': tenure, 'status': 'Notified Bank', 'type': 'N/A', 'date': date})
     
-    print("""We've notified your bank that you wish to borrow a loans
-Please contact your bank for further details.""")
-    reset()
+    print(chalk.green.bold("""We've notified your bank that you wish to borrow a loans
+Please contact your bank for further details."""))
+    sleep(3)
 
 
 def customer_loan_review():
     # Implement functionality for a customer to review
     # loan application state and loan details
+    clear()
     choices = []
     for loan in globals.account['loans']:
         choices.append(loan['type'] + ' ' + loan['date'])
@@ -65,7 +68,7 @@ def customer_loan_review():
                   choices=choices)]
     selection = inquirer.prompt(question)['selection']
     if selection == 'Cancel':
-        reset()
+        return
     print()
     t, d = selection.split()
     for loan in globals.account['loans']:
@@ -78,4 +81,4 @@ def customer_loan_review():
                 print('Interest Due', loan['interest'])
             print()
             break
-    reset()
+    sleep(3)
