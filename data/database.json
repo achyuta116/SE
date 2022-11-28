@@ -8,7 +8,7 @@
       "accounts": [
         {
           "type": "Savings",
-          "balance": 120
+          "balance": 420
         },
         {
           "type": "Current",

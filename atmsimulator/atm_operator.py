@@ -1,5 +1,6 @@
 import sys
 from time import sleep
+import re
 
 import inquirer
 from simple_chalk import chalk
@@ -15,7 +16,7 @@ def operator_options_selection():
         inquirer.List(
             "selection",
             message="Choose operator services",
-            choices=["Shutdown", "Disable Service", "Enable Service"],
+            choices=["Shutdown", "Disable Service", "Enable Service", "Add Cash"],
         )
     ]
     selection = inquirer.prompt(choice)["selection"]
@@ -23,8 +24,11 @@ def operator_options_selection():
         operator_options_shutdown()
     elif selection == "Enable Service":
         operator_options_enable_service()
-    else:
+    elif selection == "Disable Service":
         operator_options_disable_service()
+    else:
+        operator_add_cash()
+
 
 
 def operator_options_shutdown():
@@ -103,3 +107,16 @@ def operator_options_enable_service():
         print("Mini Statement is ENABLED")
     print("Services updated")
     sleep(3)
+
+def operator_add_cash():
+    request_questions = [
+        inquirer.Text(
+            name="c",
+            message="Enter amount being added to machine: ",
+            validate=lambda _, x: re.match("^[0-9]+$", x),
+        ),
+    ]
+    cash = inquirer.prompt(request_questions)
+    cash = int(cash["c"])
+    globals.config['cash'] = cash
+

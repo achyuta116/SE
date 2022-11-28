@@ -58,6 +58,9 @@ def customer_account_cash_withdrawal():
     if globals.config["account"]["withdrawal"] != 1:
         disabled_service_message()
         return
+    elif globals.config['cash']==0:
+        return unsuccessful_transaction_message()
+
     else:
         question = [
             inquirer.List(
@@ -85,6 +88,7 @@ def customer_account_cash_withdrawal():
                 globals.account["accounts"][0]["balance"] < withdraw
                 or withdraw > 250000
                 or withdraw < 50
+                or withdraw > globals.config['cash']
             ):
                 print(
                     "Your account has insufficient balance or maximum withdrawal limit exceeded or less than minimum withdraw requested."
@@ -93,6 +97,8 @@ def customer_account_cash_withdrawal():
                 return
             else:
                 globals.account["accounts"][0]["balance"] -= withdraw
+                globals.config['cash']-= withdraw
+                # print(globals.config['cash'])
                 print(
                     "Withdraw successful. Your savings balance is: ",
                     globals.account["accounts"][0]["balance"],
@@ -106,6 +112,7 @@ def customer_account_cash_withdrawal():
                 globals.account["accounts"][1]["balance"] < withdraw
                 or withdraw > 250000
                 or withdraw < 50
+                or withdraw > globals.config['cash']
             ):
                 print(
                     "Your account has insufficient balance or maximum withdrawal limit exceeded or less than minimum withdraw requested."
@@ -114,6 +121,7 @@ def customer_account_cash_withdrawal():
                 return
             else:
                 globals.account["accounts"][1]["balance"] -= withdraw
+                globals.config['cash']-= withdraw
                 print(
                     "Withdraw successful. Your savings balance is: ",
                     globals.account["accounts"][1]["balance"],
@@ -153,6 +161,8 @@ def customer_account_cheque_deposit():
         deposit = int(deposit["d"])
         if deposit > 50:
             globals.account["accounts"][0]["balance"] += deposit
+            globals.config['cash']+= deposit
+            # print(globals.config['cash'])
             print(
                 "Deposit successful. Your savings balance is: ",
                 globals.account["accounts"][0]["balance"],
@@ -172,6 +182,7 @@ def customer_account_cheque_deposit():
             return
         else:
             globals.account["accounts"][1]["balance"] += deposit
+            globals.config['cash']+= deposit
             print(
                 "Deposit successful. Your current balance is: ",
                 globals.account["accounts"][1]["balance"],
