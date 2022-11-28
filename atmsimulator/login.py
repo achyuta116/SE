@@ -45,10 +45,7 @@ def login():
         else: 
             customer_category_selection()
             clear()
-
-            user_id = data[0].get("id")
-
-            res = requests.put(f"http://localhost:3000/users/{user_id}", 
+            res = requests.put(f"http://localhost:3000/users/{user_name}", 
                          json=get_account())
             if (res.status_code != 200):
                 print(chalk.red.bold('Something went wrong with your transaction'))
