@@ -58,6 +58,9 @@ def customer_account_cash_withdrawal():
     if globals.config["account"]["withdrawal"] != 1:
         disabled_service_message()
         return
+    elif globals.config['cash']==0:
+        return unsuccessful_transaction_message()
+
     else:
         question = [
             inquirer.List(
@@ -79,6 +82,7 @@ def customer_account_cash_withdrawal():
         ]
 
         if selection == "Savings":
+
             retries = 2
             while(True):
                 withdraw = inquirer.prompt(request_questions)
@@ -177,6 +181,8 @@ def customer_account_cheque_deposit():
         deposit = int(deposit["d"])
         if deposit > 50:
             globals.account["accounts"][0]["balance"] += deposit
+            globals.config['cash']+= deposit
+            # print(globals.config['cash'])
             print(
                 "Deposit successful. Your savings balance is: ",
                 globals.account["accounts"][0]["balance"],
@@ -196,6 +202,7 @@ def customer_account_cheque_deposit():
             return
         else:
             globals.account["accounts"][1]["balance"] += deposit
+            globals.config['cash']+= deposit
             print(
                 "Deposit successful. Your current balance is: ",
                 globals.account["accounts"][1]["balance"],
