@@ -1,10 +1,16 @@
-from texttable import Texttable
-from simple_chalk import chalk
-import time
-import inquirer
-from . import globals
-from .utils.util import *
 import re
+import time
+
+import inquirer
+from simple_chalk import chalk
+from texttable import Texttable
+
+from . import globals
+from .utils.util import (
+    clear,
+    disabled_service_message,
+    unsuccessful_transaction_message,
+)
 
 
 def customer_account_selection():
@@ -188,7 +194,17 @@ def customer_account_mini_statement():
 
             if transactions is not None and len(transactions) > 0:
                 table = Texttable(max_width=0)
-
+                table.add_row(
+                    [
+                        "Sl No.",
+                        "Time",
+                        "Transaction ID",
+                        "Type",
+                        "Withdrawl",
+                        "Deposit",
+                        "Balance",
+                    ]
+                )
                 table.set_cols_align(["c", "c", "c", "c", "c", "c", "c"])
                 table.add_rows(transactions[-5:])
 

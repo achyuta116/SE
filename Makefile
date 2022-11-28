@@ -15,10 +15,6 @@ server:
 
 .PHONY: lint
 lint:
-	@python -m flake8 --version
-	@echo -e "Running flake8 on all files...\n"
-	@flake8 .
-
 	@python -m pylint --version
 	@echo -e "Running pylint on all .py files...\n"
 	@pylint --recursive=y "."
